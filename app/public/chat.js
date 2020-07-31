@@ -9,7 +9,7 @@ chatSocket.emit('new-user', ROOM_ID, name)
 
 chatSocket.on('chat-message', data => {
     if( data.room === ROOM_ID )
-        appendMessage(`${data.name}: ${data.message}`)
+      appendMessage(`${data.name}: ${data.message}`)
 })
 
 chatSocket.on('user-connected', user => {
@@ -18,7 +18,7 @@ chatSocket.on('user-connected', user => {
 })
 
 chatSocket.on('user-disconnected', user => {
-    if( user.room === ROOM_ID )
+    if( user && user.room === ROOM_ID )
         appendMessage(`${user.name} s-a deconectat!`)
 })
 

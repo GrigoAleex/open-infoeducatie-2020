@@ -36,7 +36,12 @@ io.on('connection', socket => {
     socket.broadcast.emit('user-connected', users[socket.id])
   })
   socket.on('send-chat-message', message => {
-    socket.broadcast.emit('chat-message', { message: message, name: users[socket.id].name, room: users[socket.id].room })
+    if (users[socket.id])
+      socket.broadcast.emit('chat-message', { 
+        message: message, 
+        name: users[socket.id].name, 
+        room: users[socket.id].room 
+      })
   })
   socket.on('disconnect', () => {
     socket.broadcast.emit('user-disconnected', users[socket])
