@@ -5,30 +5,18 @@ const io = require('socket.io')(server)
 const { v4: uuidV4 } = require('uuid')
 var bodyParser = require('body-parser')
 const users = []
+var mysql = require('mysql')
+var connection = mysql.createConnection({
+  host: 'localhost',
+  user: 'root',
+  password: '',
+  database: 'open'
+})
 
 app.set('view engine', 'ejs')
-app.use(express.static('public'))
-var urlencodedParser = bodyParser.urlencoded({ extended: false })
+app.use(express.static('app/public'))
+app.use(bodyParser.urlencoded({ extended: false }));
 
-app.get('/', (req, res) => {
-  res.render('index')
-})
-
-app.post('/create-conference', (req, res) => {
-  res.redirect(`/${uuidV4()}`)
-})
-
-app.post('/join-conference', urlencodedParser, (req, res) => {
-  console.log(req.body);
-  res.redirect(`/${req.body.slug}`)
-})
-
-app.get('/:room', (req, res) => {
-  res.render('room', { 
-      roomId: req.params.room, 
-      roomTitle: req.query.title 
-  })
-})
 
 io.on('connection', socket => {
   socket.on('join-room', ( roomId, userId ) => {
@@ -38,7 +26,7 @@ io.on('connection', socket => {
       socket.to(roomId).broadcast.emit('user-disconnected', userId)
     })
   })
-
+  
   //* Chat 
   socket.on('new-user', ( roomId, name) => {
     let user = new Object()
@@ -56,4 +44,9 @@ io.on('connection', socket => {
   })
 })
 
+
+//* Routes
+require("./app/routes/web.routes.js")(app);
+
+//* Set the port, listen for requests
 server.listen(3000)

@@ -6,11 +6,13 @@
   <meta http-equiv="X-UA-Compatible" content="ie=edge">
   <script>
     const ROOM_ID = "<%= roomId %>"
+    const CAN_PARTICIPATE = "<%= canParticipate %>"
+    const STREAMING_URL = "<%= streamingUrl %>"
   </script>
   <script defer src="https://unpkg.com/peerjs@1.2.0/dist/peerjs.min.js"></script>
   <script src="http://localhost:3000/socket.io/socket.io.js" defer></script>
-  <script src="script.js" defer></script>
-  <script src="chat.js" defer></script>
+  <script src="http://localhost:3000/video.js" defer></script>
+  <script src="http://localhost:3000/chat.js" defer></script>
   <script src="https://kit.fontawesome.com/0dfb644902.js" crossorigin="anonymous"></script></head>
   <title>Document</title>
   <style>
@@ -34,8 +36,8 @@
   <div class="bg-dark" style="height: 100vh">
     <div class="text-white">
       <div class="d-flex align-items-center">
-        <h3 id="room-title" class="font-weight-bold text-uppercase p-5" style="padding-right: .25em !important;"> Video Chat Room |</h3>
-        <div class="text-muted"><span class="text-uppercase">ROOM ID: </span><%= roomId %></div>
+        <h3 id="room-title" class="font-weight-bold text-uppercase p-5" style="padding-right: .25em !important;"> <%= title %> |</h3>
+        <div id="links" class="text-muted"><span class="text-uppercase mr-4">ROOM ID: <%= url %></span></div>
       </div>
       <div class="d-flex flex-wrap flex-row justify-content-between">
         <div id="video-grid" class="m-5"></div>
