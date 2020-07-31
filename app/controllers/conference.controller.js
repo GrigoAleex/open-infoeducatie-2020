@@ -65,18 +65,14 @@ exports.show = ( req, res ) => {
             if(data.slug_participate == req.params.conferenceSlug)
                 res.render('room', {
                     roomId: data.slug_participate,
-                    canParticipate: true,
                     url: req.params.conferenceSlug,
-                    title: data.name,
-                    streamingUrl: data.slug_see
+                    title: data.name
                 })
             else
                 res.render('room', {
                     roomId: data.slug_participate,
-                    canParticipate: "Monkey coud not jump the rope :(",
                     url: req.params.conferenceSlug,
                     title: data.name,
-                    streamingUrl: data.slug_see
                 })
             return;
         }

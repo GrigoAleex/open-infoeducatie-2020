@@ -5,13 +5,11 @@ const { Module } = require("module");
 const Conference = function( conference )
 {
     this.name = conference.name;
-    this.slug_see = conference.slug_see;
     this.slug_participate = conference.slug_participate;
 }
 
 Conference.create = ( newConference, result ) => {
-    sql.query("INSERT INTO conferences SET slug_see = ?, slug_participate = ?, name = ?", [
-        newConference.slug_see,
+    sql.query("INSERT INTO conferences SET slug_participate = ?, name = ?", [
         newConference.slug_participate,
         newConference.name
     ], ( err, res ) => {
@@ -28,8 +26,8 @@ Conference.create = ( newConference, result ) => {
 }
 
 Conference.findById = ( slug, result ) => {
-    sql.query("SELECT * FROM conferences WHERE slug_participate = ? OR slug_see = ?", [
-        slug, slug
+    sql.query("SELECT * FROM conferences WHERE slug_participate = ? ", [
+        slug
     ], ( err, res ) => {
         if ( err ) 
         {
