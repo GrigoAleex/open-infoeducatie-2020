@@ -1,0 +1,35 @@
+<!DOCTYPE html>
+<html>
+    <head>
+        <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.5.0/css/bootstrap.min.css" integrity="sha384-9aIt2nRpC12Uk9gS9baDl411NQApFmC26EwAOH8WgZl5MYYxFfc+NcPb1dKGj7Sk" crossorigin="anonymous">
+    </head>
+    <body>
+        <div class="bg-dark">
+            <div class="d-flex justify-content-center align-items-center flex-column" style="height: 100vh; color: white">
+                <div class="display-4">Chat Room!</div>
+                <p class="text-center px-5">Bun venit in sala de chatroom pentru concursul Infoeducatie Editia 2020 !</p>
+                <div class="row w-75">
+                    <div class="col-lg-5 m-5 p-4 bg-light text-dark">
+                        <h2 class="text-weight-light">Creare camera</h2>
+                        <form action="/create-conference" method="post">
+                            <p>Vivamus id tincidunt felis, ac rhoncus quam. Morbi pretium commodo mauris ac dictum. In pretium. Vivamus id tincidunt felis, ac rhoncus quam. Morbi pretium commodo mauris ac dictum. In pretium.</p>
+                            <button type="submit" class="btn btn-primary mt-3">Submit</button>
+                        </form>
+                    </div>
+                    <div class="col-lg-5 m-5 p-4 bg-light text-dark">
+                        <h2 class="text-weight-light">Intrare in camera</h2>
+                        <form action="/join-conference" method="post">
+                            <p>Vivamus id tincidunt felis, ac rhoncus quam. </p>
+                            <div class="form-group">
+                                <label for="exampleInputEmail1">Codul camerei</label>
+                                <input type="text" name="slug" class="form-control">
+                            </div>
+                            
+                            <button type="submit" class="btn btn-primary">Submit</button>
+                        </form>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </body>
+</html>

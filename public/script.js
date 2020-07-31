@@ -25,6 +25,7 @@ navigator.mediaDevices.getUserMedia({
 
 socket.on('user-disconnected', userId => {
   if (peers[userId]) peers[userId].close()
+  document.getElementById(userId).remove()
 })
 
 myPeer.on('open', id => {
@@ -35,7 +36,7 @@ function connectToNewUser(userId, stream) {
   const call = myPeer.call(userId, stream)
   const video = document.createElement('video')
   call.on('stream', userVideoStream => {
-    addVideoStream(video, userVideoStream)
+    addVideoStream(video, userVideoStream, userId)
   })
   call.on('close', () => {
     video.remove()
@@ -44,8 +45,9 @@ function connectToNewUser(userId, stream) {
   peers[userId] = call
 }
 
-function addVideoStream(video, stream) {
+function addVideoStream(video, stream, userId) {
   video.srcObject = stream
+  video.id = userId
   video.addEventListener('loadedmetadata', () => {
     video.play()
   })
