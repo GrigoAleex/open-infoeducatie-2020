@@ -2,9 +2,9 @@ const chatSocket = io('/')
 const messageContainer = document.getElementById('message-container')
 const submit = document.getElementById('send-button')
 const messageInput = document.getElementById('message-input')
-const name = prompt('What is your name?')
+const name = prompt('Cum te cheama?')
 
-appendMessage('You joined')
+appendMessage('Te-ai connectat!')
 chatSocket.emit('new-user', ROOM_ID, name)
 
 chatSocket.on('chat-message', data => {
@@ -14,12 +14,12 @@ chatSocket.on('chat-message', data => {
 
 chatSocket.on('user-connected', user => {
     if(user.room === ROOM_ID)
-  appendMessage(`${user.name} connected`)
+  appendMessage(`${user.name} s-a connectat!`)
 })
 
 chatSocket.on('user-disconnected', user => {
     if( user.room === ROOM_ID )
-        appendMessage(`${user.name} disconnected`)
+        appendMessage(`${user.name} s-a deconectat!`)
 })
 
 console.log('Client-side code running');
